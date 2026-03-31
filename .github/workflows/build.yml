@@ -1,0 +1,99 @@
+name: Build macOS Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - rid: osx-arm64
+            name: FlagInjector-macOS-arm64
+          - rid: osx-x64
+            name: FlagInjector-macOS-x64
+
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Publish
+        run: |
+          dotnet publish -c Release -r ${{ matrix.rid }} \
+            --self-contained true \
+            -p:PublishSingleFile=true \
+            -p:IncludeNativeLibrariesForSelfExtract=true \
+            -p:PublishTrimmed=true \
+            -o publish/${{ matrix.rid }}
+
+      - name: Create .app bundle
+        run: |
+          APP="publish/${{ matrix.name }}.app"
+          mkdir -p "$APP/Contents/MacOS"
+          mkdir -p "$APP/Contents/Resources"
+          cp publish/${{ matrix.rid }}/FlagInjector "$APP/Contents/MacOS/FlagInjector"
+          chmod +x "$APP/Contents/MacOS/FlagInjector"
+
+          cat > "$APP/Contents/Info.plist" << 'PLIST'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>CFBundleName</key>
+            <string>FFlag Injector</string>
+            <key>CFBundleDisplayName</key>
+            <string>FFlag Injector</string>
+            <key>CFBundleIdentifier</key>
+            <string>com.flaginjector.macos</string>
+            <key>CFBundleVersion</key>
+            <string>1.0.0</string>
+            <key>CFBundleShortVersionString</key>
+            <string>1.0.0</string>
+            <key>CFBundleExecutable</key>
+            <string>FlagInjector</string>
+            <key>CFBundlePackageType</key>
+            <string>APPL</string>
+            <key>LSMinimumSystemVersion</key>
+            <string>12.0</string>
+            <key>NSHighResolutionCapable</key>
+            <true/>
+            <key>CFBundleInfoDictionaryVersion</key>
+            <string>6.0</string>
+          </dict>
+          </plist>
+          PLIST
+
+      - name: Zip
+        run: |
+          cd publish
+          zip -r -y "${{ matrix.name }}.zip" "${{ matrix.name }}.app"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: publish/${{ matrix.name }}.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/*.zip
+          generate_release_notes: true
