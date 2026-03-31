@@ -1,4 +1,4 @@
-
+ 
 
 ```markdown
 
@@ -52,7 +52,7 @@ xattr -cr /Users/YourName/Downloads/FlagInjector-macOS-arm64.app
 
 
 
-\### 4. Make Executable
+### 4. Make Executable
 
 In the same Terminal window, run:
 
@@ -66,11 +66,11 @@ chmod +x /Users/YourName/Downloads/FlagInjector-macOS-arm64.app/Contents/MacOS/F
 
 
 
-\### 5. Launch
+### 5. Launch
 
-\* \*\*Option A (Recommended):\*\* Double-click the `.app` in Finder.
+* \*\*Option A (Recommended):\*\* Double-click the `.app` in Finder.
 
-\* \*\*Option B (Terminal):\*\* Run the executable directly with root privileges:
+* \*\*Option B (Terminal):\*\* Run the executable directly with root privileges:
 
 
 
@@ -94,7 +94,7 @@ sudo /Users/YourName/Downloads/FlagInjector-macOS-x64.app/Contents/MacOS/FlagInj
 
 
 
-\## 🔐 Why It Needs Your Password
+## 🔐 Why It Needs Your Password
 
 FlagInjector utilizes macOS \*\*Mach VM APIs\*\* (`task\_for\_pid`) to write FFlags into the active Roblox process memory. Accessing the memory of another process requires \*\*root privileges\*\* on macOS.
 
@@ -104,11 +104,11 @@ FlagInjector utilizes macOS \*\*Mach VM APIs\*\* (`task\_for\_pid`) to write FFl
 
 
 
-\## 🚀 How to Use
+## 🚀 How to Use
 
 
 
-\### Injecting Flags
+### Injecting Flags
 
 1\.  Launch \*\*Roblox\*\* (or let FlagInjector auto-detect when you join a game).
 
@@ -124,13 +124,13 @@ FlagInjector utilizes macOS \*\*Mach VM APIs\*\* (`task\_for\_pid`) to write FFl
 
 
 
-\### Importing Flags
+### Importing Flags
 
 Click \*\*Import\*\* (`⌘ + O`) or drag-and-drop a `.json` file onto the app. Supported formats:
 
 
 
-\*\*Flat Object Format:\*\*
+*\*Flat Object Format:\*\*
 
 ```json
 
@@ -146,7 +146,7 @@ Click \*\*Import\*\* (`⌘ + O`) or drag-and-drop a `.json` file onto the app. S
 
 
 
-\*\*Array Format:\*\*
+*\*Array Format:\*\*
 
 ```json
 
@@ -172,7 +172,7 @@ Click \*\*Export\*\* (`⌘ + S`) to save your current configuration as a standar
 
 
 
-\## ⌨️ Keyboard Shortcuts
+## ⌨️ Keyboard Shortcuts
 
 
 
@@ -198,7 +198,7 @@ Click \*\*Export\*\* (`⌘ + S`) to save your current configuration as a standar
 
 
 
-\## 🖥️ CLI Arguments
+## 🖥️ CLI Arguments
 
 You can launch FlagInjector via Terminal with specific flags:
 
@@ -230,7 +230,7 @@ sudo ./FlagInjector --import /path/to/flags.json --auto-apply --minimized
 
 
 
-\## ❓ Troubleshooting
+## ❓ Troubleshooting
 
 
 
@@ -254,7 +254,7 @@ sudo ./FlagInjector --import /path/to/flags.json --auto-apply --minimized
 
 
 
-\## 🔒 Verify Your Download
+## 🔒 Verify Your Download
 
 \*\*File:\*\* `FlagInjector-macOS-arm64.zip`  
 
@@ -276,7 +276,7 @@ shasum -a 256 ~/Downloads/FlagInjector-macOS-arm64.zip
 
 
 
-\## 📋 Requirements
+## 📋 Requirements
 
 \* macOS (Apple Silicon or Intel)
 
