@@ -1,8 +1,4 @@
- 
-
-```markdown
-
-\# FlagInjector for macOS — User Guide
+# FlagInjector for macOS — User Guide
 
 
 
@@ -14,11 +10,11 @@ A powerful, native utility for injecting and managing FFlags in Roblox on macOS.
 
 
 
-\## 📥 Download \& Setup
+## 📥 Download \& Setup
 
 
 
-\### 1. Download the Correct Version
+### 1. Download the Correct Version
 
 | Your Mac | Download |
 
@@ -30,13 +26,13 @@ A powerful, native utility for injecting and managing FFlags in Roblox on macOS.
 
 
 
-\### 2. Unzip
+### 2. Unzip
 
 Double-click the `.zip` in your Downloads folder to extract `FlagInjector-macOS-<arch>.app`.
 
 
 
-\### 3. Remove Quarantine
+### 3. Remove Quarantine
 
 macOS prevents unsigned apps from running by default. Open \*\*Terminal\*\* (⌘ + Space → type "Terminal") and run:
 
